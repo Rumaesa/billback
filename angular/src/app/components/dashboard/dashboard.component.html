@@ -1,0 +1,31 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="distributor-form">
+    <div class="sections">
+      <label for="distributor">Select Distributor Program : </label>
+      <select id="distributor" formControlName="distributor">
+        <option value="" disabled selected>Select an option</option>
+        <option *ngFor="let option of distributor" [value]="option.distributorId">
+          {{ option.distributorName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="sections">
+      <label for="claimPeriod">Claim Period : </label>
+      <select id="claimPeriod" formControlName="claimPeriod">
+        <option value="" disabled selected>Select a choice</option>
+        <option *ngFor="let option of claimPeriodOptions" [value]="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+
+    <div class="sections">
+      <label for="file">Attach File : </label>
+      <input type="file" (change)="onFileChange($event)"
+        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+    </div>
+    
+    <button type="submit" [disabled]="form.invalid">Next</button>
+    </form>
+</div>
