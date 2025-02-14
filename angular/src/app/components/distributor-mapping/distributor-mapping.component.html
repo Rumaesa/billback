@@ -1,6 +1,4 @@
-<!-- distributor-details.component.html -->
 <div class="container">
-
   <div *ngIf="formData" class="distributor-form">
     <div class="header">
       <h2>{{ formData.create ? 'Create' : 'Edit' }} Distributor Mapping</h2>
@@ -14,46 +12,61 @@
         <h3>Standard column template (Constant)</h3>
       </div>
     </div>
-    <div class="content">
-      <div class="left-mapping">
 
-        <!-- Displaying the list -->
-        <div *ngIf="distributorHeader.length > 0; else noData">
-          <ul>
-            <li *ngFor="let item of distributorHeader">{{ item }}</li>
-          </ul>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="content">
+        
+        <!--<div class="left-mapping">
+           Displaying the list -->
+          <!-- <div *ngIf="distributorHeader.length > 0; else noData">
+            <div formArrayName="dropdowns">
+              <div *ngFor="let dropdown of dropdowns; let i = index" style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
+                <select [formControlName]="i" id="dropdown-{{i}}" style="width: 60%; height: 2.2rem;">
+                  <option value="" disabled>Select an option</option>
+                  <option *ngFor="let option of getAvailableOptions(i)" [value]="option">{{ option }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <ng-template #noData>
+            <p>No distributor header data available.</p>
+          </ng-template>
         </div>
 
-        <!-- Template for when the list is empty -->
-        <ng-template #noData>
-          <p>No distributor header data available.</p>
-        </ng-template>
+        <div class="right-mapping">
+          <div *ngIf="standardHeader.length > 0; else noData">
+            <ul>
+              <li *ngFor="let item of standardHeader">{{ item }}</li>
+            </ul>
+          </div>
+          <ng-template #noData>
+            <p>No Standard header data available.</p>
+          </ng-template>
+        </div> -->
 
-      </div>
-      <div class="right-mapping">
-
-        <div *ngIf="standardHeader.length > 0; else noData" >
-          <ul>
-            <li *ngFor="let item of standardHeader" >{{ item }}</li>
-          </ul>
+        <div class="options" *ngFor="let item of standardHeader; let i = index" style="width: 100%;">
+          <div style="width: 30%;" formArrayName="dropdowns">
+            <select [formControlName]="i" id="dropdown-{{i}}">
+              <option value="" disabled>Select an option</option>
+              <option *ngFor="let option of getAvailableOptions(i)" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+          </div>
+          <div style="width: 70%;">
+            <p>{{ item }}</p>
+          </div>
         </div>
 
-        <!-- Template for when the list is empty -->
-        <ng-template #noData>
-          <p>No Standard header data available.</p>
-        </ng-template>
+      <div class="button-section">
+        <button type="submit" [disabled]="form.invalid">Save Mapping</button>
+        <button type="button" (click)="cancel()">Cancel</button>
       </div>
-      <!-- <p><strong>Claim Period:</strong> {{ formData.claimPeriod }}</p>
-      <p><strong>File:</strong> {{ formData.file?.name || 'No file uploaded' }}</p> -->
-    </div>
-    <div class="button-section">
-      <button type="submit">Save Mapping</button>
-      <button>Cancel</button>
-    </div>
+      </div>
+    </form>
   </div>
 
   <div *ngIf="!formData">
     <p>No data available.</p>
   </div>
-
 </div>

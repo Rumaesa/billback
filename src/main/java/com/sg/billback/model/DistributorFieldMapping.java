@@ -1,11 +1,21 @@
 package com.sg.billback.model;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
-import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
@@ -18,11 +28,14 @@ public class DistributorFieldMapping implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "mapping_id", nullable = false)
-    private int mappingId;
+    @Column(name = "mapping_id")
+    private Integer mappingId;
+    
+    
 
-//    @Column(name = "distributor_id", nullable = false)
-//    private int distributorId;
+    @OneToOne
+    @JoinColumn(name = "distributor_id", referencedColumnName = "distributor_id")
+    private Distributor distributor;
 
     @Column(name = "distributor_name", nullable = false, length = 45)
     private String distributorName;
@@ -30,35 +43,32 @@ public class DistributorFieldMapping implements Serializable {
     @Column(name = "claim_period", nullable = false, length = 8)
     private String claimPeriod;
 
-    @Column(name = "customer_shipto_address", length = 45)
-    private String customerShiptoAddress;
+    @Column(name = "customer_product_shipto_address", length = 45)
+    private String customerProductShippedToAddress;
 
-    @Column(name = "amount_credited_per_line", length = 45)
-    private String amountCreditedPerLine;
+    @Column(name = "amount_credited_per_item", length = 45)
+    private String amountCreditedPerItem;
 
     @Column(name = "billback_partner_customer_number", length = 45)
     private String billbackPartnerCustomerNumber;
 
-    @Column(name = "customer_shipto_city", length = 45)
-    private String customerShiptoCity;
+    @Column(name = "customer_product_shipto_city", length = 45)
+    private String customerProductShippedToCity;
 
-    @Column(name = "invoice_date", length = 45)
-    private String invoiceDate;
+    @Column(name = "invoice_ship_date", length = 45)
+    private String invoiceShippedDate;
 
-    @Column(name = "invoice_number", length = 45)
-    private String invoiceNumber;
+    @Column(name = "distributor_billed_shipped_invoice_number", length = 45)
+    private String distributorBilledShippedInvoiceNumber;
 
-    @Column(name = "distributor_invoice_number", length = 45)
-    private String distributorInvoiceNumber;
-
-    @Column(name = "distributor_cutomer_name", length = 45)
-    private String distributorCustomerName;
+    @Column(name = "customer_distributor_name", length = 45)
+    private String customerDistributorName;
 
     @Column(name = "no_mapping", length = 45)
     private String noMapping;
 
-    @Column(name = "unit_price_item", length = 45)
-    private String unitPriceItem;
+    @Column(name = "sga_px_customer_unit_price", length = 45)
+    private String sgaPXCustomerUnitPrice;
 
     @Column(name = "quanity_shipped", length = 45)
     private String quantityShipped;
@@ -69,22 +79,27 @@ public class DistributorFieldMapping implements Serializable {
     @Column(name = "material_number", length = 45)
     private String materialNumber;
 
-    @Column(name = "sales_invoice_date", length = 45)
-    private String salesInvoiceDate;
+    @Column(name = "billback_sga_px_distributor_customer_combination", length = 45)
+    private String billbackSgaPXDistributorCustomerCombination;
 
-    @Column(name = "customer_product_state", length = 45)
-    private String customerProductState;
+    @Column(name = "customer_product_shipto_state", length = 45)
+    private String customerProductShippedToState;
 
-    @Column(name = "sga_distributor_uom", length = 45)
-    private String sgaDistributorUom;
+    @Column(name = "distributor_sga_invoice_uom", length = 45)
+    private String distributorSgaInvoiceUOM;
 
-    @Column(name = "sga_distributor_unit_price", length = 45)
-    private String sgaDistributorUnitPrice;
+    @Column(name = "distributor_invoice_sga_product_unit_price", length = 45)
+    private String distributorInvoiceSgaProductUnitPrice;
 
-    @Column(name = "agreed_cost", length = 45)
-    private String agreedCost;
+    @Column(name = "customer_product_shipto_zipcode", length = 45)
+    private String customerProductShippedToZipCode;
+    
+    @Column(name = "date_created")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date dateCreated;
+    
+    @Column(name = "date_modified")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private Date dateModified;
 
-    @OneToOne
-    @JoinColumn(name = "distributor_id", referencedColumnName = "distributor_id")
-    private Distributor distributor;
 }

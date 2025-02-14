@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardService } from '../../services/dashboardService';
 import { Distributor } from '../../models/Distributor';
 import { DistributorForm } from '../../models/DistributorForm';
 import { DistributorDataService } from '../../services/DistributorDataService';
-import { Router } from '@angular/router';
 import * as XLSX from 'xlsx';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',

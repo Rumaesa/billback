@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DistributorFieldMapping } from '../models/DistributorFieldMapping';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,14 @@ export class DashboardService {
   }
 
   getActiveDistributors(): Observable<any> {
-    let apiUrl = 'http://localhost:8080/getActiveDistributors';
+    let apiUrl = '/api/getActiveDistributors';
     return this.http.get<any>(apiUrl);
   }
+
+  createDistributorMapping(distributorMapping: DistributorFieldMapping, distributorId: number): Observable<any> {
+    let apiUrl = `/api/createDistributorMapping/${distributorId}`;
+    return this.http.post<any>(apiUrl,distributorMapping);
+  }
+
   
  }
