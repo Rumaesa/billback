@@ -2,5 +2,6 @@ export interface Distributor {
   distributorId: number;
   distributorName: string;
   status: string;
-  header: string;
+  header: number;
+  isMappingPresent: boolean;
 }

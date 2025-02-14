@@ -1,0 +1,25 @@
+import { DistributorFieldMapping } from './DistributorFieldMapping';
+
+export const distributorFieldMappingMock: DistributorFieldMapping = {
+  mappingId: 1,
+  distributorName: 'ABC Distributor',
+  claimPeriod: '2025-01',
+  customerShiptoAddress: '123 Main St',
+  amountCreditedPerLine: '1000',
+  billbackPartnerCustomerNumber: 'BP123',
+  customerShiptoCity: 'New York',
+  invoiceDate: '2025-01-01',
+  invoiceNumber: 'INV123',
+  distributorInvoiceNumber: 'DIS123',
+  distributorCustomerName: 'John Doe',
+  noMapping: 'No',
+  unitPriceItem: '200',
+  quantityShipped: '10',
+  rebateClaim: '500',
+  materialNumber: 'MAT123',
+  salesInvoiceDate: '2025-01-10',
+  customerProductState: 'NY',
+  sgaDistributorUom: 'Kg',
+  sgaDistributorUnitPrice: '50',
+  agreedCost: '4500',
+};

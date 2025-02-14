@@ -30,5 +30,8 @@ public class Distributor {
 	
 	@Column(name = "header")
 	private String header;
+	
+	@Column(name = "is_mapping_present")
+	private Boolean isMappingPresent;
 
 }

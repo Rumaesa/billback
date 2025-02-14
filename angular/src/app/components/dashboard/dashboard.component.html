@@ -1,8 +1,8 @@
 <div class="container">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="distributor-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="distributor-form">
     <div class="sections">
       <label for="distributor">Select Distributor Program : </label>
-      <select id="distributor" formControlName="distributor">
+      <select id="distributor" formControlName="distributor" (change)="onDistributorSelect($event)">
         <option value="" disabled selected>Select an option</option>
         <option *ngFor="let option of distributor" [value]="option.distributorId">
           {{ option.distributorName }}

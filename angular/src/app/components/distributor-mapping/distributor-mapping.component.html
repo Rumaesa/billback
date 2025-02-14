@@ -1,0 +1,59 @@
+<!-- distributor-details.component.html -->
+<div class="container">
+
+  <div *ngIf="formData" class="distributor-form">
+    <div class="header">
+      <h2>{{ formData.create ? 'Create' : 'Edit' }} Distributor Mapping</h2>
+      <p>Distributor Name: {{ formData.distributorName }}</p>
+    </div>
+    <div class="content-header">
+      <div class="header-one">
+        <h3>Distributor column names (Variable)</h3>
+      </div>
+      <div class="header-two">
+        <h3>Standard column template (Constant)</h3>
+      </div>
+    </div>
+    <div class="content">
+      <div class="left-mapping">
+
+        <!-- Displaying the list -->
+        <div *ngIf="distributorHeader.length > 0; else noData">
+          <ul>
+            <li *ngFor="let item of distributorHeader">{{ item }}</li>
+          </ul>
+        </div>
+
+        <!-- Template for when the list is empty -->
+        <ng-template #noData>
+          <p>No distributor header data available.</p>
+        </ng-template>
+
+      </div>
+      <div class="right-mapping">
+
+        <div *ngIf="standardHeader.length > 0; else noData" >
+          <ul>
+            <li *ngFor="let item of standardHeader" >{{ item }}</li>
+          </ul>
+        </div>
+
+        <!-- Template for when the list is empty -->
+        <ng-template #noData>
+          <p>No Standard header data available.</p>
+        </ng-template>
+      </div>
+      <!-- <p><strong>Claim Period:</strong> {{ formData.claimPeriod }}</p>
+      <p><strong>File:</strong> {{ formData.file?.name || 'No file uploaded' }}</p> -->
+    </div>
+    <div class="button-section">
+      <button type="submit">Save Mapping</button>
+      <button>Cancel</button>
+    </div>
+  </div>
+
+  <div *ngIf="!formData">
+    <p>No data available.</p>
+  </div>
+
+</div>
