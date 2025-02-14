@@ -35,15 +35,22 @@ public class DistributorServiceImp implements DistributorService{
 		Optional<Distributor> distributor = this.distributorRepository.findById(distributorId);
 		System.out.println("--------------------------- "+distributor.toString());
 		if(distributor.isPresent()) {
-			if(distributor.get().getIsMappingPresent().TRUE) {
+			
+			if(Boolean.TRUE.equals(distributor.get().getIsMappingPresent())) {
 				distributorFieldMapping.setDateModified(new Date());
+				DistributorFieldMapping savedDMR =  this.distributorMappingRepository.save(distributorFieldMapping);
+				return savedDMR;
 			}
 			else {
 				distributorFieldMapping.setDateCreated(new Date());
-			}
-			distributorFieldMapping.setDistributor(distributor.get());
-			DistributorFieldMapping savedDMR =  this.distributorMappingRepository.save(distributorFieldMapping);
-			return savedDMR;
+				distributorFieldMapping.setDistributor(distributor.get());
+				DistributorFieldMapping savedDMR =  this.distributorMappingRepository.save(distributorFieldMapping);
+				distributor.get().setDistributorFieldMapping(savedDMR);
+				distributor.get().setIsMappingPresent(true);
+				this.distributorRepository.save(distributor.get());
+				return savedDMR;
+			}	
+			
 		}	else {
 			throw new RuntimeException("Distibutor not found");
 		}

@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,5 +35,9 @@ public class Distributor {
 	
 	@Column(name = "is_mapping_present")
 	private Boolean isMappingPresent;
+	
+	@OneToOne
+	@JoinColumn(name = "mapping_id", referencedColumnName = "mapping_id")
+	private DistributorFieldMapping distributorFieldMapping;
 
 }
