@@ -1,5 +1,6 @@
 package com.sg.billback.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +35,12 @@ public class DistributorServiceImp implements DistributorService{
 		Optional<Distributor> distributor = this.distributorRepository.findById(distributorId);
 		System.out.println("--------------------------- "+distributor.toString());
 		if(distributor.isPresent()) {
+			if(distributor.get().getIsMappingPresent().TRUE) {
+				distributorFieldMapping.setDateModified(new Date());
+			}
+			else {
+				distributorFieldMapping.setDateCreated(new Date());
+			}
 			distributorFieldMapping.setDistributor(distributor.get());
 			DistributorFieldMapping savedDMR =  this.distributorMappingRepository.save(distributorFieldMapping);
 			return savedDMR;

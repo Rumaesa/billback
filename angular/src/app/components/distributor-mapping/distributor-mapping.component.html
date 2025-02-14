@@ -15,9 +15,10 @@
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="content">
-        <div class="left-mapping">
-          <!-- Displaying the list -->
-          <div *ngIf="distributorHeader.length > 0; else noData">
+        
+        <!--<div class="left-mapping">
+           Displaying the list -->
+          <!-- <div *ngIf="distributorHeader.length > 0; else noData">
             <div formArrayName="dropdowns">
               <div *ngFor="let dropdown of dropdowns; let i = index" style="display: flex; align-items: center; gap: 20px; margin-bottom: 15px;">
                 <select [formControlName]="i" id="dropdown-{{i}}" style="width: 60%; height: 2.2rem;">
@@ -41,12 +42,26 @@
           <ng-template #noData>
             <p>No Standard header data available.</p>
           </ng-template>
+        </div> -->
+
+        <div class="options" *ngFor="let item of standardHeader; let i = index" style="width: 100%;">
+          <div style="width: 30%;" formArrayName="dropdowns">
+            <select [formControlName]="i" id="dropdown-{{i}}">
+              <option value="" disabled>Select an option</option>
+              <option *ngFor="let option of getAvailableOptions(i)" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+          </div>
+          <div style="width: 70%;">
+            <p>{{ item }}</p>
+          </div>
         </div>
-      </div>
 
       <div class="button-section">
         <button type="submit" [disabled]="form.invalid">Save Mapping</button>
         <button type="button" (click)="cancel()">Cancel</button>
+      </div>
       </div>
     </form>
   </div>

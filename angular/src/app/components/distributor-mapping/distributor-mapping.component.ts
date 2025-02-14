@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { DistributorForm } from '../../models/DistributorForm';
 import { DistributorDataService } from '../../services/DistributorDataService';
 import { STANDARD_HEADER } from '../../constants/Constants';
-import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { DistributorFieldMapping } from '../../models/DistributorFieldMapping';
 import { DashboardService } from '../../services/dashboardService';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-distributor-mapping',
@@ -20,7 +23,7 @@ export class DistributorMappingComponent implements OnInit {
 // dropdowns: any;
 
   constructor(private distributorDataService: DistributorDataService,
-    private distributorService: DashboardService
+    private distributorService: DashboardService, private dialog: MatDialog, private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -89,5 +92,17 @@ export class DistributorMappingComponent implements OnInit {
     }
   }
 
-  cancel(){}
+  cancel(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: { message: 'All the mapping will be lost. Are you sure you want to cancel?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // User confirmed, navigate to another page
+        this.router.navigate(['/dashboard']); // Change to your target route
+      }
+    });
+  }
 }
