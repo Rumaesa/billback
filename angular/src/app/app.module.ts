@@ -7,12 +7,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { DistributorMappingComponent } from './components/distributor-mapping/distributor-mapping.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     DistributorMappingComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

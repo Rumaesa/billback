@@ -1,26 +1,23 @@
 import { Distributor } from "./Distributor";
 
 export interface DistributorFieldMapping {
-  mappingId: number;
   distributorName: string;
   claimPeriod: string;
-  customerShiptoAddress: string;
-  amountCreditedPerLine: string;
+  customerProductShippedToAddress: string;
+  amountCreditedPerItem: string;
   billbackPartnerCustomerNumber: string;
-  customerShiptoCity: string;
-  invoiceDate: string;
-  invoiceNumber: string;
-  distributorInvoiceNumber: string;
-  distributorCustomerName: string;
+  customerProductShippedToCity: string;
+  invoiceShippedDate: string;
+  distributorBilledShippedInvoiceNumber: string;
+  customerDistributorName: string;
   noMapping: string;
-  unitPriceItem: string;
+  sgaPXCustomerUnitPrice: string;
   quantityShipped: string;
   rebateClaim: string;
   materialNumber: string;
-  salesInvoiceDate: string;
-  customerProductState: string;
-  sgaDistributorUom: string;
-  sgaDistributorUnitPrice: string;
-  agreedCost: string;
-  // distributor: Distributor; // Reference to the Distributor model
+  billbackSgaPXDistributorCustomerCombination: string;
+  customerProductShippedToState: string;
+  distributorSgaInvoiceUOM: string;
+  distributorInvoiceSgaProductUnitPrice: string;
+  customerProductShippedToZipCode: string;
 }

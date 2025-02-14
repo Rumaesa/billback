@@ -1,11 +1,14 @@
 package com.sg.billback.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sg.billback.model.Distributor;
+import com.sg.billback.model.DistributorFieldMapping;
+import com.sg.billback.repository.DistributorMappingRepository;
 import com.sg.billback.repository.DistributorRepository;
 import com.sg.billback.service.DistributorService;
 
@@ -16,12 +19,28 @@ public class DistributorServiceImp implements DistributorService{
 	
 	@Autowired
 	private DistributorRepository distributorRepository;
+	@Autowired
+	private DistributorMappingRepository distributorMappingRepository;
 	
 	@Override
 	public List<Distributor> getDistributors() {
 		List<Distributor> distributors = this.distributorRepository.findByStatus(ACTIVE_STATUS);
 		return distributors;
 	}
+
+	@Override
+	public DistributorFieldMapping createDistributorMapping(DistributorFieldMapping distributorFieldMapping, Integer distributorId) {
+		System.out.println("create distributor mapping..."+ distributorFieldMapping);
+		Optional<Distributor> distributor = this.distributorRepository.findById(distributorId);
+		System.out.println("--------------------------- "+distributor.toString());
+		if(distributor.isPresent()) {
+			distributorFieldMapping.setDistributor(distributor.get());
+			DistributorFieldMapping savedDMR =  this.distributorMappingRepository.save(distributorFieldMapping);
+			return savedDMR;
+		}	else {
+			throw new RuntimeException("Distibutor not found");
+		}
+		}
 	
 
 }
