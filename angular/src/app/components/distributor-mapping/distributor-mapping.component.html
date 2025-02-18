@@ -2,7 +2,7 @@
   <div *ngIf="formData" class="distributor-form">
     <div class="header">
       <h2>{{ formData.create ? 'Create' : 'Edit' }} Distributor Mapping</h2>
-      <p>Distributor Name: {{ formData.distributorName }}</p>
+      <p>Distributor Name: {{ formData.distributor.distributorName }}</p>
     </div>
     <div class="content-header">
       <div class="header-one">
@@ -16,7 +16,7 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="content">
         <div class="options" *ngFor="let item of standardHeader; let i = index" style="width: 100%;">
-          <div style="width: 30%;" formArrayName="dropdowns">
+          <div style="width: 25%;" formArrayName="dropdowns">
             <select [formControlName]="i" id="dropdown-{{i}}">
               <option value="" disabled>Select an option</option>
               <option *ngFor="let option of getAvailableOptions(i)" [value]="option">
@@ -24,7 +24,10 @@
               </option>
             </select>
           </div>
-          <div style="width: 70%;">
+          <div style="width: 25%;" *ngIf="!formData.create">
+           <span>{{ distributorMappingDto?.[HEADER_TO_DTO_MAP[item]] || 'N/A' }}</span>
+          </div>
+          <div style="width: 50%;">
             <p>{{ item }}</p>
           </div>
         </div>

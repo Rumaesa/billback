@@ -66,8 +66,7 @@ export class DashboardComponent implements OnInit {
     if (this.form.valid) {
       if (this.selectedDistributor) {
         this.distributorFormData = {
-          distributorId: this.selectedDistributor.distributorId,
-          distributorName: this.selectedDistributor.distributorName,
+          distributor: this.selectedDistributor,
           claimPeriod: form.value.claimPeriod,
           file: this.selectedFile,
           create: this.selectedDistributor.isMappingPresent ? false : true,
