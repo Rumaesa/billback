@@ -17,3 +17,24 @@ export const STANDARD_HEADER = [
   "Unit price on distributor invoice from SGA for this product",
   "Zip Code of customer product shipped to"
 ];
+
+export const propertyOrder = [
+  'customerProductShippedToAddress',
+  'amountCreditedPerItem',
+  'billbackPartnerCustomerNumber',
+  'customerProductShippedToCity',
+  'invoiceShippedDate',
+  'distributorBilledShippedInvoiceNumber',
+  'customerDistributorName',
+  'noMapping',
+  'sgaPXCustomerUnitPrice',
+  'quantityShipped',
+  'rebateClaim',
+  'materialNumber',
+  'billbackSgaPXDistributorCustomerCombination',
+  'customerProductShippedToState',
+  'distributorSgaInvoiceUOM',
+  'distributorInvoiceSgaProductUnitPrice',
+  'customerProductShippedToZipCode'
+];
+

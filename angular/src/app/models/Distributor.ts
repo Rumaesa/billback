@@ -4,4 +4,5 @@ export interface Distributor {
   status: string;
   header: number;
   isMappingPresent: boolean;
+  mappingId: number;
 }

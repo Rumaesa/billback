@@ -3,3 +3,27 @@ body {
   font-family: 'revert', sans-serif;
   /* Replace with the font of your choice */
 }
+
+.snackbar-error {
+  background-color: #d32f2f !important;
+  color: white !important;
+}
+
+.snackbar-success {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Style the close button */
+.success-snackbar .mat-button {
+  color: white !important;
+  /* Default text color */
+}
+
+/* Change text color on hover */
+.success-snackbar .mat-button:hover {
+  color: red !important;
+  /* Change to red when hovered */
+}

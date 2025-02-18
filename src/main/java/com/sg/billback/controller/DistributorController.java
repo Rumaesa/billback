@@ -1,6 +1,7 @@
 package com.sg.billback.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sg.billback.model.Distributor;
+import com.sg.billback.dto.DistributorDTO;
+import com.sg.billback.dto.DistributorFieldMappingDTO;
 import com.sg.billback.model.DistributorFieldMapping;
 import com.sg.billback.service.DistributorService;
 
@@ -29,19 +31,30 @@ public class DistributorController {
 	private DistributorService distributorService;
 	
 	@GetMapping("/getActiveDistributors")
-	public ResponseEntity<List<Distributor>> getActiveDistributors(){
-		List<Distributor> distributors = this.distributorService.getDistributors();
+	public ResponseEntity<List<DistributorDTO>> getActiveDistributors(){
+		List<DistributorDTO> distributors = this.distributorService.getDistributors();
 		return new ResponseEntity<>(distributors, HttpStatus.OK);
 	}
 	
-	@PostMapping("/createDistributorMapping/{distributorId}")
-	public ResponseEntity<DistributorFieldMapping> createDistributorMapping(@Valid @RequestBody DistributorFieldMapping distributorFieldMapping, BindingResult result, @PathVariable Integer distributorId){
+	@GetMapping("/getDistributorMapping/{mappingId}")
+	public ResponseEntity<Optional<DistributorFieldMappingDTO>> getDistributorMapping(@PathVariable Integer mappingId){
+		Optional<DistributorFieldMappingDTO> distributorMapping = this.distributorService.getDistributorMapping(mappingId);
+		if(distributorMapping.isPresent()) {
+			return ResponseEntity.ok(distributorMapping);
+		} else {
+			throw new RuntimeException("Distrbutor Mapping Not Found");
+		}
+	}
+	
+	@PostMapping("/createDistributorMapping/{distributorId}/{create}")
+	public ResponseEntity<DistributorFieldMappingDTO> createDistributorMapping(@Valid @RequestBody DistributorFieldMapping distributorFieldMapping, BindingResult result, @PathVariable Integer distributorId, @PathVariable Boolean create){
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().build();
 		}
-		DistributorFieldMapping savedDistributorFieldMapping =  this.distributorService.createDistributorMapping(distributorFieldMapping, distributorId);
+		DistributorFieldMappingDTO savedDistributorFieldMapping =  this.distributorService.createDistributorMapping(distributorFieldMapping, distributorId, create);
 		return new ResponseEntity<>(savedDistributorFieldMapping, HttpStatus.CREATED);
 	}
 
+	
 	
 }

@@ -21,8 +21,13 @@ export class DashboardService {
     return this.http.get<any>(apiUrl);
   }
 
-  createDistributorMapping(distributorMapping: DistributorFieldMapping, distributorId: number): Observable<any> {
-    let apiUrl = `/api/createDistributorMapping/${distributorId}`;
+  getDistributorMapping(mappingId: number): Observable<any> {
+    let apiUrl = `/api/getDistributorMapping/${mappingId}`;
+    return this.http.get<any>(apiUrl);
+  }
+
+  createDistributorMapping(distributorMapping: DistributorFieldMapping, distributorId: number, create: boolean): Observable<any> {
+    let apiUrl = `/api/createDistributorMapping/${distributorId}/${create}`;
     return this.http.post<any>(apiUrl,distributorMapping);
   }
 

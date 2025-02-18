@@ -1,14 +1,14 @@
+import { Distributor } from "./Distributor";
+
 export class DistributorForm {
-  distributorId: number;
-  distributorName: string;
+  distributor: Distributor
   claimPeriod: string;
   file: File | null;
   create: boolean;
   distributorHeader: any[];
 
-  constructor(distributorId: number, claimPeriod: string, file: File | null, create: boolean, distributorName: string, distributorHeader: any[]) {
-    this.distributorId = distributorId;
-    this.distributorName = distributorName;
+  constructor(distributor: Distributor , claimPeriod: string, file: File | null, create: boolean, distributorHeader: any[]) {
+    this.distributor = distributor;
     this.claimPeriod = claimPeriod;
     this.file = file;
     this.create = create;
