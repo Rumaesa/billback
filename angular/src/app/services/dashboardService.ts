@@ -18,17 +18,17 @@ export class DashboardService {
 
   getActiveDistributors(): Observable<any> {
     let apiUrl = '/api/getActiveDistributors';
-    return this.http.get<any>(apiUrl);
+    return this.http.get<any>(apiUrl, {withCredentials: true});
   }
 
   getDistributorMapping(mappingId: number): Observable<any> {
     let apiUrl = `/api/getDistributorMapping/${mappingId}`;
-    return this.http.get<any>(apiUrl);
+    return this.http.get<any>(apiUrl, {withCredentials: true});
   }
 
   createDistributorMapping(distributorMapping: DistributorFieldMapping, distributorId: number, create: boolean): Observable<any> {
     let apiUrl = `/api/createDistributorMapping/${distributorId}/${create}`;
-    return this.http.post<any>(apiUrl,distributorMapping);
+    return this.http.post<any>(apiUrl,distributorMapping, {withCredentials: true});
   }
 
   
