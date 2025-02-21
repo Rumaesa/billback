@@ -6,9 +6,12 @@ import { DistributorDataService } from '../../services/DistributorDataService';
 import * as XLSX from 'xlsx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthServiceTsService } from '../../services/auth.service.ts.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: false,
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -30,6 +33,8 @@ export class DashboardComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private dashboardService: DashboardService,
     private distributorDataService: DistributorDataService,
+    private authService: AuthServiceTsService,
+    private messageService: MessageService,
     private router: Router) {
   }
 
@@ -41,6 +46,20 @@ export class DashboardComponent implements OnInit {
     });
     this.getActiveDistributors();
     this.claimPeriodOptions = this.getPast13Months();
+  }
+
+  logOut() {
+    this.authService.logoutService().subscribe(
+      response => {
+        console.log(response);
+        sessionStorage.clear();
+        this.router.navigate(['/']);
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Signed Out Successfully!!' });
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Something went wrong' });
+      }
+    )
   }
 
   onDistributorSelect(event: any): void {

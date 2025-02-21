@@ -18,7 +18,7 @@ export class DashboardService {
 
   getActiveDistributors(): Observable<any> {
     let apiUrl = '/api/getActiveDistributors';
-    return this.http.get<any>(apiUrl);
+    return this.http.get<any>(apiUrl, {withCredentials: true});
   }
 
   getDistributorMapping(mappingId: number): Observable<any> {

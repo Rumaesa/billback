@@ -15,6 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-distributor-mapping',
+  standalone: false,
   templateUrl: './distributor-mapping.component.html',
   styleUrl: './distributor-mapping.component.scss'
 })
