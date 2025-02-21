@@ -44,7 +44,6 @@ export class LoginComponent {
     };    this.authService.loginService(dto).subscribe(
       response => {
         if(response.length > 0) {
-          console.log(response);
           sessionStorage.setItem('username', username as string);
           this.router.navigate(['/dashboard']);
         }

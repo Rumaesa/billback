@@ -18,7 +18,7 @@ export class AuthServiceTsService {
 
   loginService(loginDto: {username: string, password: string}): Observable<any> {
     let apiUrl = 'http://localhost:8080/api/auth/signin';
-    return this.http.post(apiUrl, loginDto, {responseType: 'text'});
+    return this.http.post(apiUrl, loginDto, {responseType: 'text', withCredentials: true});
   }
 
   registerUser(userDetails: User) {
@@ -37,7 +37,7 @@ export class AuthServiceTsService {
   }
 
   getUserByUsername(username: string): Observable<User[]>{
-    let apiUrl = 'http://localhost:9101/pms/login';
-    return this.http.get<User[]>(apiUrl);
+    let apiUrl = 'http://localhost:8080/api/auth/username';
+    return this.http.get<User[]>(apiUrl, {withCredentials: true});
   }
 }
