@@ -19,10 +19,18 @@
 .sections {
   display: flex;
   justify-content: space-between;
+  align-items: anchor-center;
+}
+
+.attach-section {
+  display: flex;
+  justify-content: center;
+  align-items: anchor-center;
 }
 
 select {
-  width: 12rem;
+  width: 15rem;
+  height: 2rem;
   border: 1px solid #5c6ca4;
   margin: 0 1rem;
 }
@@ -43,4 +51,22 @@ button:disabled {
 .icon {
   font-size: 20px;
   margin-right: 8px;
+}
+
+.custom-file-upload {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 50px;
+  border: 1px solid #5c6ca4;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.custom-file-upload:hover {
+  background-color: #5c6ca4;
+  color: #fff   ;
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
 }

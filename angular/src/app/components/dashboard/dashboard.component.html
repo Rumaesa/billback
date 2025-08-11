@@ -1,9 +1,9 @@
 <div class="container">
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="distributor-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form)" class="distributor-form">
     <div class="sections">
       <label for="distributor">Select Distributor Program : </label>
       <select id="distributor" formControlName="distributor" (change)="onDistributorSelect($event)">
-        <option value="" disabled selected>Select an option</option>
+        <option value="" disabled selected>Select Distributor </option>
         <option *ngFor="let option of distributor" [value]="option.distributorId">
           {{ option.distributorName }}
         </option>
@@ -13,19 +13,21 @@
     <div class="sections">
       <label for="claimPeriod">Claim Period : </label>
       <select id="claimPeriod" formControlName="claimPeriod">
-        <option value="" disabled selected>Select a choice</option>
+        <option value="" disabled selected>Select Claim Period</option>
         <option *ngFor="let option of claimPeriodOptions" [value]="option">
           {{ option }}
         </option>
       </select>
     </div>
 
-    <div class="sections">
-      <label for="file">Attach File : </label>
-      <input type="file" (change)="onFileChange($event)"
-        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+    <div class="attach-section">
+      <label class="custom-file-upload">
+        <input type="file" (change)="onFileChange($event)"
+          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+        📎 Attach File
+      </label>
     </div>
-    
+
     <button type="submit" [disabled]="form.invalid">Next</button>
-    </form>
+  </form>
 </div>
